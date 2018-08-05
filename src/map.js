@@ -24,6 +24,8 @@ export function initMap(ymaps, containerId) {
   loadList().then(data => {
     objectManager.add(data);
   });
+  //  выводим метки на карту - отсутствовал вызов метода
+  myMap.geoObjects.add(objectManager);
 
   // details
   objectManager.objects.events.add('click', event => {
@@ -44,7 +46,8 @@ export function initMap(ymaps, containerId) {
   const listBoxControl = createFilterControl(ymaps);
   myMap.controls.add(listBoxControl);
 
-  var filterMonitor = new ymaps.Monitor(listBoxControl.state);
+  // строка 49 использовался способ инициализации c помощью var, изменил на const
+  const filterMonitor = new ymaps.Monitor(listBoxControl.state);
   filterMonitor.add('filters', filters => {
     objectManager.setFilter(
       obj => filters[obj.isActive ? 'active' : 'defective']

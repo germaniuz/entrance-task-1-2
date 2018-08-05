@@ -1,4 +1,7 @@
-const PUBLIC_PATH = require('path').join(__dirname, 'public');
+// вынес служебные модули, добавил express
+const path = require('path');
+
+const PUBLIC_PATH = path.join(__dirname, 'public');
 const { initBackendStub } = require('./utils/backend-stub');
 
 module.exports = {

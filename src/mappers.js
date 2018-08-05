@@ -8,7 +8,7 @@ export function mapServerData(serverData) {
       geometry: 
       {
         type: "Point",
-        coordinates: [obj.long, obj.lat]
+        coordinates: [obj.lat, obj.long]  // перепутана последовательность широты и долготы
       },
       properties: {
         iconCaption: obj.serialNumber
