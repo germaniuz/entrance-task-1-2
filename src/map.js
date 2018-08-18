@@ -19,7 +19,7 @@ export function initMap(ymaps, containerId) {
     geoObjectBalloonContentLayout: getDetailsContentLayout(ymaps)
   });
 
-  objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+  // удалил кастомизацию зеленого цвета для кластеров
 
   loadList().then(data => {
     objectManager.add(data);
@@ -36,7 +36,8 @@ export function initMap(ymaps, containerId) {
 
     if (!obj.properties.details) {
       loadDetails(objectId).then(data => {
-        obj.properties.details = data;
+        // неверно указано свойство объекта details
+        obj.properties.balloonContent = data;
         objectManager.objects.balloon.setData(obj);
       });
     }

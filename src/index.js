@@ -5,5 +5,5 @@ import { initMap } from "./map";
 
 ymaps.ready(() => {
   initMap(ymaps, "map");
-  console.log("inited");
+  //удалил ненужный вывод в консоль
 });

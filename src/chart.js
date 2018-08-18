@@ -12,7 +12,12 @@ function getLabel(el, i, data) {
   x.setMinutes(0);
   x.setSeconds(0);
   x.setMilliseconds(0);
-  return x.toString();
+  return x.toLocaleString("ru-RU"); // привел формат даты и времени к национальному значению (да и так симпотичнее выглядит =) и помещается в строку)
+}
+
+// написал функцию получения максимального числа в массиве соединений
+function getMaxConnections(data) {
+  return Math.max.apply(null, data);
 }
 
 export function createChart(container, data, isActive) {
@@ -20,8 +25,10 @@ export function createChart(container, data, isActive) {
 
   const borderColor = getColor(isActive);
   const backgroundColor = getColor(isActive, 0.5);
+  // получаем максимальное количество соединений
+  const maxConnections = getMaxConnections(data);
 
-  const chart = new Chart(ctx, {
+  const chart = new Chart(ctx, { // есть мнение что лучше сразу возвратить новый объект без присваивания ее переменной, но я придерживаюсь того чтобы оставить как есть
     type: 'line',
     data: {
       labels: data.map(getLabel),
@@ -40,10 +47,10 @@ export function createChart(container, data, isActive) {
         },
         scales: {
             xAxes: [{ ticks: { display: false } }],
-            yAxes: [{ ticks: { beginAtZero: true, max: 0 } }]
+            yAxes: [{ ticks: { beginAtZero: true, max: maxConnections } }] // верхней точкой оси соединений принимаем максимальное количесвто соединений
         }
     }
   });
 
-  return chart;
+  return chart; // есть мнение что лучше сразу возвратить новый объект без присваивания ее переменной, но я придерживаюсь того чтобы оставить как есть
 }
